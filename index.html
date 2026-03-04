@@ -10,38 +10,64 @@
         body { transition: background-color 0.4s ease; margin: 0; min-height: 100vh; display: flex; box-sizing: border-box; gap: 25px; padding: 25px; overflow-x: hidden; }
         body.dark-mode { --primary: #37b36f; --bg-color: #050505; --panel-bg: rgba(20, 20, 20, 0.8); --glass-border: rgba(255, 255, 255, 0.1); --text-color: white; --input-bg: rgba(0,0,0,0.6); background-color: var(--bg-color); color: var(--text-color); font-family: 'Montserrat', sans-serif; }
         body.light-mode { --primary: #0d9488; --bg-color: #f8fafc; --panel-bg: rgba(255, 255, 255, 0.8); --glass-border: rgba(0, 0, 0, 0.05); --text-color: #0f172a; --input-bg: #ffffff; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); color: var(--text-color); font-family: 'Plus Jakarta Sans', sans-serif; }
+        
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         body.light-mode .stars { display: none; }
         body.dark-mode .stars { display: block; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: glisten var(--duration) infinite ease-in-out; }
         @keyframes glisten { 0%, 100% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
-        .sidebar { width: 260px; background: var(--panel-bg); backdrop-filter: blur(30px); border: 1px solid var(--glass-border); padding: 30px 20px; display: flex; flex-direction: column; gap: 20px; border-radius: 30px; height: calc(100vh - 50px); box-sizing: border-box; overflow-y: auto; }
+        
+        /* SIDEBAR (Desktop) */
+        .sidebar { width: 260px; background: var(--panel-bg); backdrop-filter: blur(30px); border: 1px solid var(--glass-border); padding: 30px 20px; display: flex; flex-direction: column; gap: 20px; border-radius: 30px; height: calc(100vh - 50px); box-sizing: border-box; overflow-y: auto; position: sticky; top: 25px; }
+        
         .section-title { color: var(--primary); font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; border-left: 3px solid var(--primary); padding-left: 10px; }
         .input-group { display: flex; flex-direction: column; gap: 8px; }
         label { font-size: 0.6rem; opacity: 0.6; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        input, select { background: var(--input-bg); border: 1px solid var(--glass-border); color: var(--text-color); padding: 12px; border-radius: 12px; font-family: inherit; font-size: 0.85rem; outline: none; }
+        input, select { background: var(--input-bg); border: 1px solid var(--glass-border); color: var(--text-color); padding: 12px; border-radius: 12px; font-family: inherit; font-size: 0.85rem; outline: none; width: 100%; box-sizing: border-box; }
+        
         .theme-toggle { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 14px; cursor: pointer; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; }
         body.dark-mode .theme-toggle { color: black; }
+        
+        /* CONTENT (Desktop) */
         .main-content { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; }
         .logo-text { font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 0; letter-spacing: -1px; }
         .btn-download { background: var(--primary); color: white; border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
         body.dark-mode .btn-download { color: black; }
+        
         .card { background: var(--panel-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; }
+        
+        /* Builder Grid (Desktop) */
         .builder-row { display: grid; grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr; gap: 15px; align-items: flex-end; }
+        
         .btn-add { background: var(--text-color); color: var(--bg-color); border: none; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
         body.dark-mode .btn-add { background: var(--primary); color: black; }
+        
         .quote-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 20px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
         .btn-remove { background: #ff4b4b; color: white; border: none; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        
         .valuation-card { background: linear-gradient(135deg, rgba(55, 179, 111, 0.1) 0%, rgba(0,0,0,0.05) 100%); border: 2px solid var(--primary); padding: 30px; border-radius: 25px; text-align: right; margin-top: 10px; }
         .total-val { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin: 0; font-family: 'Inter'; }
 
-        /* --- PILL TOGGLE DESIGN --- */
         .currency-switcher { display: flex; background: rgba(0, 0, 0, 0.2); padding: 4px; border-radius: 12px; gap: 4px; border: 1px solid var(--glass-border); }
         body.light-mode .currency-switcher { background: rgba(255, 255, 255, 0.5); }
         .cur-pill { border: none; background: transparent; color: var(--text-color); padding: 6px 16px; border-radius: 8px; cursor: pointer; font-size: 0.7rem; font-weight: 800; transition: all 0.3s ease; opacity: 0.6; }
         .cur-pill.active { background: var(--primary); color: white !important; opacity: 1; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
         body.dark-mode .cur-pill.active { color: #000 !important; }
+
+        /* --- MOBILE VIEW (RESPONSIVE) --- */
+        @media screen and (max-width: 850px) {
+            body { flex-direction: column; padding: 15px; gap: 15px; }
+            .sidebar { width: 100%; height: auto; position: relative; top: 0; border-radius: 20px; padding: 20px; }
+            .header { flex-direction: column; gap: 15px; align-items: flex-start; }
+            .logo-text { font-size: 1.6rem; }
+            .builder-row { grid-template-columns: 1fr; gap: 15px; }
+            .card { padding: 20px; border-radius: 20px; }
+            .valuation-card { text-align: center; padding: 20px; }
+            .total-val { font-size: 1.8rem; }
+            .quote-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .quote-item div:last-child { align-self: flex-end; }
+        }
     </style>
 </head>
 <body class="dark-mode">
@@ -72,7 +98,7 @@
             <input type="text" id="clientAddressInput" placeholder="Enter address">
         </div>
 
-        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
             <div class="section-title">Status</div>
             <p id="status" style="font-size: 0.6rem; opacity: 0.5;">Connecting...</p>
         </div>
@@ -80,7 +106,7 @@
 
     <main class="main-content">
         <div class="header">
-            <h1 class="logo-text">Bayut Studios | Price Calculator</h1>
+            <h1 class="logo-text">Bayut Studios</h1>
             <button class="btn-download" onclick="generateInvoice()">Download PDF</button>
         </div>
         <div class="card">
@@ -102,7 +128,7 @@
             </div>
         </div>
         <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
                 <div class="section-title">Quote Summary</div>
                 <div class="currency-switcher">
                     <button id="btn-PKR" class="cur-pill active" onclick="setCurrency('PKR')">PKR</button>
@@ -135,16 +161,13 @@
             localStorage.setItem('theme', newTheme);
         }
 
-        // --- UPDATED PROPOSAL ENGINE WITH ADDRESS ---
         function generateInvoice() {
             if (cart.length === 0) return alert("Please add items first!");
-            
             const clientName = document.getElementById('clientNameInput').value || "<Client Representative>";
             const clientEmail = document.getElementById('clientEmailInput').value || "<Email>";
             const clientAddress = document.getElementById('clientAddressInput').value || "<Address>";
             const printWindow = window.open('', '_blank');
             const date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
-            
             let sums = { pkr: 0, aed: 0, dpkr: 0, daed: 0 };
             let rows = cart.map(item => {
                 const multi = ((1 + (item.savedMargin / 100)) / 1.07);
@@ -156,7 +179,6 @@
                 sums.pkr += p; sums.aed += a; sums.dpkr += dp; sums.daed += da;
                 return `<tr><td class="desc">${item.name}</td><td class="center">${item.qty}</td><td>PKR ${Math.round(p).toLocaleString()}</td><td>dh ${a.toFixed(2)}</td><td>PKR ${Math.round(dp).toLocaleString()}</td><td class="bold">dh ${da.toFixed(2)}</td></tr>`;
             }).join('');
-
             printWindow.document.write(`<html><head><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet"><style>body { font-family: 'Inter', sans-serif; color: #1a1a1a; padding: 0; margin: 0; background: #fff; -webkit-print-color-adjust: exact; }.page { padding: 40mm 20mm; position: relative; min-height: 297mm; box-sizing: border-box; }.header-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; font-size: 32px; color: #37b36f; margin-bottom: 20px; }.header-logo span { color: #1a1a1a; font-weight: 300; }.title-banner { background: #37b36f; color: white; text-align: center; padding: 15px; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; }.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; font-size: 11px; line-height: 1.6; }.section-label { font-weight: 800; font-size: 9px; text-transform: uppercase; color: #999; letter-spacing: 1px; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 5px; }.date-text { position: absolute; top: 140px; right: 20mm; text-align: right; font-size: 11px; }table { width: 100%; border-collapse: collapse; margin-top: 10px; }th { background: #37b36f; color: white; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; padding: 12px 8px; text-align: left; }td { padding: 14px 8px; border-bottom: 1px solid #f0f0f0; font-size: 11px; color: #444; }.center { text-align: center; }.bold { font-weight: 700; color: #1a1a1a; }.grand-total-row { background: #f9fbf9; font-weight: 800; }.summary-container { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-end; }.summary-line { width: 300px; display: flex; justify-content: space-between; padding: 6px 0; font-size: 11px; color: #666; }.due-box { width: 340px; background: #37b36f; color: white; padding: 18px 25px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 15px; }.footer-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 18px; background: #37b36f; }.footer-logo { position: absolute; bottom: 40px; right: 20mm; font-weight: 800; font-size: 22px; color: #37b36f; }</style></head><body><div class="page"><div class="header-logo">@bayut <span>Studios</span></div><div class="title-banner">Project Proposal</div><div class="date-text">Date:<br><strong>${date}</strong></div><div class="info-grid"><div><div class="section-label">Billed From</div><strong style="color:#37b36f; font-size:13px;">Bayut Studios | Price Calculator</strong><br>Building 03 – 5th Floor, Dubai Design<br>District (D3), Dubai<br><span style="color:#37b36f">https://bayutstudios.com/</span></div><div style="text-align:right"><div class="section-label">Billed To</div><strong>${clientName}</strong><br>${clientEmail}<br>${clientAddress}</div></div><table><thead><tr><th style="width:30%">Category</th><th class="center">Units</th><th>Price (PKR)</th><th>Price (AED)</th><th>Disc. (PKR)</th><th>Disc. (AED)</th></tr></thead><tbody>${rows}<tr class="grand-total-row"><td>GRAND TOTAL</td><td class="center">${cart.reduce((a, b) => a + b.qty, 0)}</td><td>PKR ${Math.round(sums.pkr).toLocaleString()}</td><td>dh ${sums.aed.toFixed(2)}</td><td>PKR ${Math.round(sums.dpkr).toLocaleString()}</td><td>dh ${sums.daed.toFixed(2)}</td></tr></tbody></table><div class="summary-container"><div class="summary-line"><span>SUBTOTAL</span><span>dh ${sums.aed.toFixed(2)}</span></div><div class="summary-line"><span>DISCOUNTED TOTAL</span><span>dh ${sums.daed.toFixed(2)}</span></div><div class="due-box"><span>Total Due</span><span>dh ${sums.daed.toFixed(2)}</span></div></div><div style="margin-top:60px; font-size:10px; color:#999; max-width:400px;"><strong>Terms & Conditions:</strong><br>Quotation valid for 30 days. Professional arrangement subject to studio availability.</div><div class="footer-logo">@bayut <span>Studios</span></div><div class="footer-bar"></div></div></body></html>`);
             printWindow.document.close();
             setTimeout(() => printWindow.print(), 500);
