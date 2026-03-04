@@ -17,16 +17,24 @@
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: glisten var(--duration) infinite ease-in-out; }
         @keyframes glisten { 0%, 100% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
         
+        /* --- TOP RIGHT SQUARE THEME TOGGLE --- */
+        .theme-toggle { 
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: var(--primary); color: white; border: none; 
+            width: 45px; height: 45px; border-radius: 8px; /* Square with slight rounding */
+            cursor: pointer; font-size: 1.2rem; display: flex; 
+            align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
+        }
+        body.dark-mode .theme-toggle { color: black; }
+        .theme-toggle:hover { transform: rotate(180deg); }
+
         /* SIDEBAR (Desktop) */
         .sidebar { width: 260px; background: var(--panel-bg); backdrop-filter: blur(30px); border: 1px solid var(--glass-border); padding: 30px 20px; display: flex; flex-direction: column; gap: 20px; border-radius: 30px; height: calc(100vh - 50px); box-sizing: border-box; overflow-y: auto; position: sticky; top: 25px; }
-        
         .section-title { color: var(--primary); font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; border-left: 3px solid var(--primary); padding-left: 10px; }
         .input-group { display: flex; flex-direction: column; gap: 8px; }
         label { font-size: 0.6rem; opacity: 0.6; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         input, select { background: var(--input-bg); border: 1px solid var(--glass-border); color: var(--text-color); padding: 12px; border-radius: 12px; font-family: inherit; font-size: 0.85rem; outline: none; width: 100%; box-sizing: border-box; }
-        
-        .theme-toggle { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 14px; cursor: pointer; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; }
-        body.dark-mode .theme-toggle { color: black; }
         
         /* CONTENT (Desktop) */
         .main-content { flex: 1; display: flex; flex-direction: column; gap: 20px; }
@@ -37,7 +45,6 @@
         
         .card { background: var(--panel-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; }
         .builder-row { display: grid; grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr; gap: 15px; align-items: flex-end; }
-        
         .btn-add { background: var(--text-color); color: var(--bg-color); border: none; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
         body.dark-mode .btn-add { background: var(--primary); color: black; }
         
@@ -53,30 +60,18 @@
         .cur-pill.active { background: var(--primary); color: white !important; opacity: 1; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
         body.dark-mode .cur-pill.active { color: #000 !important; }
 
-        /* --- MOBILE VIEW (RESPONSIVE) --- */
+        /* --- MOBILE VIEW (RESPONSIVE ORDERING) --- */
         @media screen and (max-width: 850px) {
             body { flex-direction: column; padding: 15px; gap: 20px; overflow-y: auto; }
-            
-            /* Sidebar becomes the second element */
             .sidebar { width: 100%; height: auto; position: relative; top: 0; border-radius: 20px; padding: 20px; order: 2; }
-            
-            /* Main content container is first, but we re-order its children */
             .main-content { order: 1; display: flex; flex-direction: column; gap: 20px; }
-            
-            /* Header (Logo) at the very top */
             .header { order: 1; flex-direction: column; gap: 15px; align-items: center; text-align: center; }
-            .logo-text { font-size: 1.4rem; }
-            
-            /* Download Button moved to bottom of header or separate */
-            .btn-download { order: 4; width: 100%; }
-            
-            /* Product Selection (Builder) after Sidebar */
+            .logo-text { font-size: 1.4rem; padding-right: 40px; } /* Space for fixed button */
             .builder-card { order: 3; }
             .builder-row { grid-template-columns: 1fr; gap: 15px; }
-            
-            /* Quote Summary after Builder */
-            .summary-card { order: 5; }
-            
+            .summary-card { order: 4; }
+            .btn-download-container { order: 5; }
+            .btn-download { width: 100%; padding: 20px; }
             .card { padding: 20px; border-radius: 20px; }
             .valuation-card { text-align: center; padding: 20px; }
             .total-val { font-size: 1.8rem; }
@@ -88,8 +83,9 @@
 <body class="dark-mode">
     <div class="stars" id="starField"></div>
     
+    <button class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">⇄</button>
+    
     <aside class="sidebar">
-        <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
         <div class="input-group">
             <div class="section-title">Snapshot Rates</div>
             <label>Margin (%)</label>
@@ -123,7 +119,9 @@
     <main class="main-content">
         <div class="header">
             <h1 class="logo-text">Bayut Studios | Price Calculator</h1>
-            <button class="btn-download" onclick="generateInvoice()">Download PDF</button>
+            <div class="btn-download-container">
+                <button class="btn-download" onclick="generateInvoice()">Download PDF</button>
+            </div>
         </div>
         
         <div class="card builder-card">
@@ -147,7 +145,7 @@
 
         <div class="card summary-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
-                <div class="section-title">Quote Summary</div>
+                <div class="section-title">Total Project Scope</div>
                 <div class="currency-switcher">
                     <button id="btn-PKR" class="cur-pill active" onclick="setCurrency('PKR')">PKR</button>
                     <button id="btn-USD" class="cur-pill" onclick="setCurrency('USD')">USD</button>
@@ -157,7 +155,7 @@
             </div>
             <div id="cartList"></div>
             <div id="valuationBox" style="display:none;" class="valuation-card">
-                <div class="section-title" style="margin-bottom: 10px; border:none; padding:0;">Total Project Valuation</div>
+                <div class="section-title" style="margin-bottom: 10px; border:none; padding:0;">Estimated Valuation</div>
                 <p id="mainTotal" class="total-val">PKR 0</p>
                 <p id="subTotals" style="opacity:0.7; font-size:1rem; margin-top:5px;"></p>
             </div>
@@ -166,7 +164,7 @@
 
     <script>
         const SHEET_ID = '1qvBKlYH7q4dXsu7tEh9OLnKSydfONNRzGa-xjUYLB0g';
-        const DATA_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+        const DATA_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx:out:json`;
         let db = [], cart = [], activeCur = 'PKR';
 
         const savedTheme = localStorage.getItem('theme') || 'dark-mode';
