@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bayut Studios | Interactive Project Portal</title>
+    <title>Bayut Studios | Project Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -26,7 +26,7 @@
             gap: 20px;
         }
 
-        /* --- HIGH-DEFINITION STAR ENGINE --- */
+        /* --- ULTRA-FINE STAR ENGINE --- */
         .stars { 
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%; 
@@ -37,63 +37,66 @@
             position: absolute; 
             background: white; 
             border-radius: 50%; 
-            opacity: 0.8; 
-            box-shadow: 0 0 2px rgba(255, 255, 255, 0.5); /* Shorter glow for sharpness */
+            opacity: 0;
+            filter: blur(0.2px); /* Sharp particles */
             animation: glisten var(--duration) infinite ease-in-out; 
         }
         @keyframes glisten { 
-            0%, 100% { opacity: 0.3; transform: scale(1); } 
-            50% { opacity: 1; transform: scale(1.1); } 
+            0%, 100% { opacity: 0.1; transform: scale(1); } 
+            50% { opacity: 0.7; transform: scale(1.2); } 
         }
 
-        /* --- NARROW ROUNDED SIDEBAR --- */
+        /* --- NARROW SIDEBAR --- */
         .sidebar {
-            width: 220px; /* Narrower width */
+            width: 240px;
             background: var(--panel-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
             border: 1px solid var(--glass-border);
-            padding: 25px;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            border-radius: 25px; /* Round cornered box */
+            gap: 25px;
+            border-radius: 30px;
             height: calc(100vh - 40px);
             box-sizing: border-box;
         }
 
-        .section-title { color: var(--primary-green); font-size: 0.75rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+        .section-title { color: var(--primary-green); font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; border-left: 3px solid var(--primary-green); padding-left: 10px; }
         .input-group { display: flex; flex-direction: column; gap: 8px; }
-        label { font-size: 0.65rem; opacity: 0.7; font-weight: 700; text-transform: uppercase; }
-        input, select { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; padding: 10px; border-radius: 10px; font-family: inherit; font-size: 0.85rem; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary-green); }
+        label { font-size: 0.6rem; opacity: 0.6; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        input, select { background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: 12px; font-family: inherit; font-size: 0.85rem; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--primary-green); box-shadow: 0 0 10px rgba(55, 179, 111, 0.2); }
 
         /* --- MAIN CONTENT AREA --- */
         .main-content { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; }
-        .logo-text { font-size: 2.2rem; font-weight: 900; color: var(--primary-green); margin: 0; }
+        .logo-text { font-size: 2.2rem; font-weight: 900; color: var(--primary-green); margin: 0; letter-spacing: -1px; }
         
-        .btn-download { background: var(--primary-green); color: black; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
-        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(55, 179, 111, 0.4); }
+        .btn-download { background: var(--primary-green); color: black; border: none; padding: 14px 28px; border-radius: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(55, 179, 111, 0.4); }
 
-        .card { background: var(--panel-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 25px; padding: 30px; }
+        .card { background: var(--panel-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         .builder-row { display: grid; grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr; gap: 15px; align-items: flex-end; }
-        .btn-add { background: var(--primary-green); color: black; border: none; padding: 12px; border-radius: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
-        .btn-add:hover { background: white; }
+        .btn-add { background: var(--primary-green); color: black; border: none; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
+        .btn-add:hover { background: white; transform: scale(1.02); }
 
         /* --- QUOTE LIST --- */
-        .cur-btn { border: 1px solid var(--glass-border); background: transparent; color: white; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.7rem; font-weight: 900; }
+        .cur-btn { border: 1px solid var(--glass-border); background: transparent; color: white; padding: 8px 18px; border-radius: 10px; cursor: pointer; font-size: 0.7rem; font-weight: 900; transition: 0.2s; }
         .cur-btn.active { background: var(--primary-green); color: black; border-color: var(--primary-green); }
-        .quote-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 20px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .btn-remove { background: #ff4b4b; color: white; border: none; width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .quote-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 20px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .btn-remove { background: #ff4b4b; color: white; border: none; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .btn-remove:hover { background: white; color: #ff4b4b; transform: rotate(90deg); }
 
         /* --- PRINT STYLES --- */
         #invoice-print-area { display: none; }
         @media print {
+            @page { size: A4 landscape; margin: 1cm; }
             body * { display: none !important; }
             #invoice-print-area { display: block !important; background: white !important; color: black !important; padding: 40px; }
             table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-            th { text-align: left; background: #f0f0f0; padding: 12px; border-bottom: 2px solid var(--primary-green); }
-            td { padding: 12px; border-bottom: 1px solid #eee; }
+            th { text-align: left; background: #f0f0f0; padding: 12px; border-bottom: 2px solid var(--primary-green); font-size: 10px; }
+            td { padding: 12px; border-bottom: 1px solid #eee; font-size: 11px; }
+            .print-total-row { margin-top: 30px; text-align: right; border-top: 2px solid black; padding-top: 15px; font-weight: 900; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -102,7 +105,7 @@
 
     <aside class="sidebar">
         <div class="input-group">
-            <div class="section-title">Variables</div>
+            <div class="section-title">Adjust Rates</div>
             <label>Margin (%)</label>
             <input type="number" id="marginInput" value="7" step="0.5" oninput="render()">
         </div>
@@ -110,9 +113,9 @@
             <label>Discount (%)</label>
             <input type="number" id="discountInput" value="0" step="0.5" oninput="render()">
         </div>
-        <div style="margin-top: auto; padding-top: 20px;">
-            <div class="section-title">System Sync</div>
-            <p id="status" style="font-size: 0.6rem; opacity: 0.5;">Sheet Connection Active</p>
+        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+            <div class="section-title">Status</div>
+            <p id="status" style="font-size: 0.6rem; opacity: 0.5;">Connecting to Inventory...</p>
         </div>
     </aside>
 
@@ -127,7 +130,7 @@
             <div class="builder-row">
                 <div class="input-group">
                     <label>Category</label>
-                    <select id="catSelect" onchange="updateProducts()"><option>Select Category...</option></select>
+                    <select id="catSelect" onchange="updateProducts()"><option>Syncing...</option></select>
                 </div>
                 <div class="input-group">
                     <label>Product</label>
@@ -144,7 +147,7 @@
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <div class="section-title">Quote Summary</div>
-                <div style="display: flex; gap: 5px;">
+                <div style="display: flex; gap: 6px;">
                     <button id="btn-PKR" class="cur-btn active" onclick="setCurrency('PKR')">PKR</button>
                     <button id="btn-USD" class="cur-btn" onclick="setCurrency('USD')">USD</button>
                     <button id="btn-SAR" class="cur-btn" onclick="setCurrency('SAR')">SAR</button>
@@ -156,17 +159,25 @@
     </main>
 
     <div id="invoice-print-area">
-        <h1 style="color:#37b36f;">Bayut Studios Quotation</h1>
-        <p id="inv-date"></p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 4px solid #37b36f; padding-bottom: 20px;">
+            <div>
+                <h1 style="color:#37b36f; margin:0; font-size: 2.5rem;">BAYUT STUDIOS</h1>
+                <p style="margin:5px 0; font-size: 10px; letter-spacing: 2px;">STRATEGIC CREATIVE SOLUTIONS</p>
+            </div>
+            <div style="text-align: right;">
+                <h2 style="margin:0; text-transform: uppercase;">Official Quotation</h2>
+                <p id="inv-date" style="font-size: 12px; margin: 5px 0;"></p>
+            </div>
+        </div>
         <table>
             <thead>
                 <tr>
-                    <th>Description</th><th>Qty</th><th>PKR</th><th>USD</th><th>SAR</th><th>AED</th>
+                    <th width="35%">Description</th><th>Qty</th><th>PKR</th><th>USD</th><th>SAR</th><th>AED</th>
                 </tr>
             </thead>
             <tbody id="print-rows"></tbody>
         </table>
-        <div id="print-totals" style="margin-top:20px; text-align:right; font-weight:900; font-size:1.2rem;"></div>
+        <div id="print-totals" class="print-total-row"></div>
     </div>
 
     <script>
@@ -189,6 +200,7 @@
             }).filter(x => x);
             const cats = [...new Set(db.map(i => i.cat))];
             document.getElementById('catSelect').innerHTML = '<option value="">Select Category</option>' + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+            document.getElementById('status').innerText = "Live: Inventory Synchronized";
         });
 
         function updateProducts() {
@@ -208,7 +220,13 @@
             const qty = parseInt(document.getElementById('unitInput').value) || 1;
             const item = db.find(i => i.name === name);
             if(item) {
-                cart.push({ ...item, qty });
+                // Smart Merge Logic
+                const existing = cart.find(c => c.name === name);
+                if(existing) {
+                    existing.qty += qty;
+                } else {
+                    cart.push({ ...item, qty });
+                }
                 render();
             }
         }
@@ -216,12 +234,18 @@
         function render() {
             const margin = parseFloat(document.getElementById('marginInput').value) || 0;
             const discount = parseFloat(document.getElementById('discountInput').value) || 0;
+            
+            // Formula: (Sheet Price / Baked 1.07) * User Margin * (1 - Discount)
             const multi = ((1 + (margin / 100)) / 1.07) * (1 - (discount / 100));
 
             const list = document.getElementById('cartList');
             const printList = document.getElementById('print-rows');
             list.innerHTML = ''; printList.innerHTML = '';
             let sums = { pkr: 0, usd: 0, sar: 0, aed: 0 };
+
+            if(cart.length === 0) {
+                list.innerHTML = '<p style="opacity: 0.2; text-align: center; padding: 40px;">Your project scope is empty.</p>';
+            }
 
             cart.forEach((item, idx) => {
                 const p = (item.pkr / item.bQty) * multi * item.qty;
@@ -231,28 +255,29 @@
                 sums.pkr += p; sums.usd += u; sums.sar += s; sums.aed += a;
 
                 const displayVal = activeCur === 'PKR' ? Math.round(p).toLocaleString() : (activeCur === 'USD' ? u : (activeCur === 'SAR' ? s : a)).toFixed(2);
+                
                 list.innerHTML += `<div class="quote-item">
-                    <div><b>${item.name}</b><br><small>Qty: ${item.qty}</small></div>
+                    <div><b>${item.name}</b><br><small>Qty: ${item.qty} units</small></div>
                     <div style="display:flex; align-items:center; gap:15px;">
-                        <span style="font-weight:900;">${activeCur} ${displayVal}</span>
+                        <span style="font-weight:900; font-family:Inter;">${activeCur} ${displayVal}</span>
                         <button class="btn-remove" onclick="cart.splice(${idx},1);render()">×</button>
                     </div>
                 </div>`;
                 printList.innerHTML += `<tr><td>${item.name}</td><td>${item.qty}</td><td>${Math.round(p).toLocaleString()}</td><td>${u.toFixed(2)}</td><td>${s.toFixed(2)}</td><td>${a.toFixed(2)}</td></tr>`;
             });
-            document.getElementById('print-totals').innerText = `Total: PKR ${Math.round(sums.pkr).toLocaleString()} | USD ${sums.usd.toFixed(2)} | SAR ${sums.sar.toFixed(2)} | AED ${sums.aed.toFixed(2)}`;
-            document.getElementById('inv-date').innerText = "Generated: " + new Date().toLocaleDateString();
+            document.getElementById('print-totals').innerText = `TOTAL: PKR ${Math.round(sums.pkr).toLocaleString()} | USD ${sums.usd.toFixed(2)} | SAR ${sums.sar.toFixed(2)} | AED ${sums.aed.toFixed(2)}`;
+            document.getElementById('inv-date').innerText = "Date: " + new Date().toLocaleDateString();
         }
 
-        // --- FINE-GRAINED STAR SYSTEM ---
+        // --- ULTRA-FINE STAR PARTICLES ---
         const f = document.getElementById('starField');
-        for(let i=0; i<150; i++) {
+        for(let i=0; i<180; i++) {
             const s = document.createElement('div'); s.className = 'star';
-            const size = (Math.random() * 1.5 + 0.5) + 'px'; // Smaller particles
+            const size = (Math.random() * 1.2 + 0.3) + 'px'; 
             s.style.width = s.style.height = size;
             s.style.top = Math.random() * 100 + '%';
             s.style.left = Math.random() * 100 + '%';
-            s.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            s.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
             f.appendChild(s);
         }
     </script>
