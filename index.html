@@ -37,10 +37,13 @@
         
         .card { background: var(--panel-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; }
         .builder-row { display: grid; grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr; gap: 15px; align-items: flex-end; }
+        
         .btn-add { background: var(--text-color); color: var(--bg-color); border: none; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
         body.dark-mode .btn-add { background: var(--primary); color: black; }
+        
         .quote-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 20px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
         .btn-remove { background: #ff4b4b; color: white; border: none; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        
         .valuation-card { background: linear-gradient(135deg, rgba(55, 179, 111, 0.1) 0%, rgba(0,0,0,0.05) 100%); border: 2px solid var(--primary); padding: 30px; border-radius: 25px; text-align: right; margin-top: 10px; }
         .total-val { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin: 0; font-family: 'Inter'; }
 
@@ -52,14 +55,28 @@
 
         /* --- MOBILE VIEW (RESPONSIVE) --- */
         @media screen and (max-width: 850px) {
-            body { flex-direction: column; padding: 15px; gap: 15px; }
-            /* SIDEBAR AT BOTTOM */
+            body { flex-direction: column; padding: 15px; gap: 20px; overflow-y: auto; }
+            
+            /* Sidebar becomes the second element */
             .sidebar { width: 100%; height: auto; position: relative; top: 0; border-radius: 20px; padding: 20px; order: 2; }
-            /* LOGO/MAIN CONTENT AT TOP */
-            .main-content { order: 1; }
-            .header { flex-direction: column; gap: 15px; align-items: center; text-align: center; }
+            
+            /* Main content container is first, but we re-order its children */
+            .main-content { order: 1; display: flex; flex-direction: column; gap: 20px; }
+            
+            /* Header (Logo) at the very top */
+            .header { order: 1; flex-direction: column; gap: 15px; align-items: center; text-align: center; }
             .logo-text { font-size: 1.4rem; }
+            
+            /* Download Button moved to bottom of header or separate */
+            .btn-download { order: 4; width: 100%; }
+            
+            /* Product Selection (Builder) after Sidebar */
+            .builder-card { order: 3; }
             .builder-row { grid-template-columns: 1fr; gap: 15px; }
+            
+            /* Quote Summary after Builder */
+            .summary-card { order: 5; }
+            
             .card { padding: 20px; border-radius: 20px; }
             .valuation-card { text-align: center; padding: 20px; }
             .total-val { font-size: 1.8rem; }
@@ -70,6 +87,7 @@
 </head>
 <body class="dark-mode">
     <div class="stars" id="starField"></div>
+    
     <aside class="sidebar">
         <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
         <div class="input-group">
@@ -107,7 +125,8 @@
             <h1 class="logo-text">Bayut Studios | Price Calculator</h1>
             <button class="btn-download" onclick="generateInvoice()">Download PDF</button>
         </div>
-        <div class="card">
+        
+        <div class="card builder-card">
             <div class="section-title" style="margin-bottom: 20px;">Quote Builder</div>
             <div class="builder-row">
                 <div class="input-group">
@@ -125,7 +144,8 @@
                 <button class="btn-add" onclick="addToQuote()">Add to Quote</button>
             </div>
         </div>
-        <div class="card">
+
+        <div class="card summary-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
                 <div class="section-title">Quote Summary</div>
                 <div class="currency-switcher">
