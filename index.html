@@ -37,7 +37,6 @@
         
         .card { background: var(--panel-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; }
         .builder-row { display: grid; grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr; gap: 15px; align-items: flex-end; }
-        
         .btn-add { background: var(--text-color); color: var(--bg-color); border: none; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
         body.dark-mode .btn-add { background: var(--primary); color: black; }
         
@@ -53,30 +52,28 @@
         .cur-pill.active { background: var(--primary); color: white !important; opacity: 1; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
         body.dark-mode .cur-pill.active { color: #000 !important; }
 
-        /* --- MOBILE VIEW (RESPONSIVE) --- */
+        /* --- MOBILE VIEW (RESPONSIVE ORDERING) --- */
         @media screen and (max-width: 850px) {
             body { flex-direction: column; padding: 15px; gap: 20px; overflow-y: auto; }
             
-            /* Sidebar becomes the second element */
+            /* Root container must be Flex to allow re-ordering of Sidebar vs Main Content */
             .sidebar { width: 100%; height: auto; position: relative; top: 0; border-radius: 20px; padding: 20px; order: 2; }
-            
-            /* Main content container is first, but we re-order its children */
             .main-content { order: 1; display: flex; flex-direction: column; gap: 20px; }
             
-            /* Header (Logo) at the very top */
+            /* Element Ordering within Main Content */
             .header { order: 1; flex-direction: column; gap: 15px; align-items: center; text-align: center; }
             .logo-text { font-size: 1.4rem; }
             
-            /* Download Button moved to bottom of header or separate */
-            .btn-download { order: 4; width: 100%; }
-            
-            /* Product Selection (Builder) after Sidebar */
+            /* Sections */
             .builder-card { order: 3; }
             .builder-row { grid-template-columns: 1fr; gap: 15px; }
             
-            /* Quote Summary after Builder */
-            .summary-card { order: 5; }
+            .summary-card { order: 4; } /* TOTAL PROJECT SCOPE */
             
+            /* PDF Button goes to bottom */
+            .btn-download-container { order: 5; }
+            .btn-download { width: 100%; padding: 20px; }
+
             .card { padding: 20px; border-radius: 20px; }
             .valuation-card { text-align: center; padding: 20px; }
             .total-val { font-size: 1.8rem; }
@@ -123,7 +120,9 @@
     <main class="main-content">
         <div class="header">
             <h1 class="logo-text">Bayut Studios | Price Calculator</h1>
-            <button class="btn-download" onclick="generateInvoice()">Download PDF</button>
+            <div class="btn-download-container">
+                <button class="btn-download" onclick="generateInvoice()">Download PDF</button>
+            </div>
         </div>
         
         <div class="card builder-card">
@@ -147,7 +146,7 @@
 
         <div class="card summary-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
-                <div class="section-title">Quote Summary</div>
+                <div class="section-title">Total Project Scope</div>
                 <div class="currency-switcher">
                     <button id="btn-PKR" class="cur-pill active" onclick="setCurrency('PKR')">PKR</button>
                     <button id="btn-USD" class="cur-pill" onclick="setCurrency('USD')">USD</button>
@@ -157,7 +156,7 @@
             </div>
             <div id="cartList"></div>
             <div id="valuationBox" style="display:none;" class="valuation-card">
-                <div class="section-title" style="margin-bottom: 10px; border:none; padding:0;">Total Project Valuation</div>
+                <div class="section-title" style="margin-bottom: 10px; border:none; padding:0;">Estimated Valuation</div>
                 <p id="mainTotal" class="total-val">PKR 0</p>
                 <p id="subTotals" style="opacity:0.7; font-size:1rem; margin-top:5px;"></p>
             </div>
